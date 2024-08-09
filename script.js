@@ -21,7 +21,16 @@ const range = (start, end) => Array(end - start + 1).fill(start).map((element, i
 const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0)).map(code => String.fromCharCode(code));
 
 const evalFormula = (x, cells) => {
-
+  const idToText = id => cells.find(cell => cell.id === id).value;
+  const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
+  const rangeFromString = (num1, num2) => range(parseInt(num1), parseInt(num2));
+  const elemValue = num => {
+    const inner = character => {
+      return idToText(character + num);
+    }
+    return inner;
+  }
+  
 }
 
 window.onload = () => {
