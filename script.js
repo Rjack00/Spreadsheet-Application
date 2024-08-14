@@ -5,6 +5,14 @@ const infixToFunction = {
   "/": (x, y) => x / y,
 }
 
+const infixEval = (str, regex) => str.replace(regex, (_match, arg1, operator, arg2) => infixToFunction[operator](parseFloat(arg1), parseFloat(arg2)));
+
+const highPrecedence = str => {
+  const regex = /([\d.]+)([*\/])([\d.]+)/;
+  const str2 = infixEval(str, regex);
+  return str === str2 ? str : highPrecedence(str2);
+}
+
 const isEven = num => num % 2 === 0;
 const sum = nums => nums.reduce((acc, el) => acc + el, 0);
 const average = nums => sum(nums) / nums.length;
@@ -23,6 +31,16 @@ const spreadsheetFunctions = {
     average,
     median
   }
+
+const applyFunction = str => {
+  const noHigh = highPrecedence(str);
+  const infix = /([\d.]+)([+-])([\d.]+)/;
+  const str2 = infixEval(noHigh, infix);
+  const functionCall = /([a-z0-9]*)\(([0-9., ]*)\)(?!.*\()/i;
+  const toNumberList = args => args.split(",").map(parseFloat);
+  const apply = (fn, args) => spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
+  return str2.replace(functionCall, (match, fn, args) => spreadsheetFunctions.hasOwnProperty(fn.toLowerCase()) ? apply(fn, args) : match);
+}
 
 const range = (start, end) => Array(end - start + 1).fill(start).map((element, index) => element + index);
 const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0)).map(code => String.fromCharCode(code));
