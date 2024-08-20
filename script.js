@@ -40,7 +40,9 @@ const spreadsheetFunctions = {
     //random: ([x, y]) => Math.floor(Math.random() * y + x), //this works but I don't understand why
     random: nums => Math.floor(Math.random() * (sum(spreadsheetFunctions.firsttwo(nums)) - spreadsheetFunctions.firsttwo(nums).sort((a,b) => a - b)[0]) + spreadsheetFunctions.firsttwo(nums).sort((a,b) => a - b)[0]),
     //range: nums => range(...nums), //this works but I don't understand why
-    range: nums => range(...spreadsheetFunctions.firsttwo(nums).sort((a,b) => a-b))
+    range: nums => range(...spreadsheetFunctions.firsttwo(nums).sort((a,b) => a-b)),
+    //nodupes: nums => [...new Set(nums).values()], //"new Set()" only allows unique values
+    nodupes: nums => nums.filter((num, index) => nums.indexOf(num) === index)
   }
 
 const applyFunction = str => {
