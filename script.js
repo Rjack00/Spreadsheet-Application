@@ -32,10 +32,15 @@ const spreadsheetFunctions = {
     median,
     even: nums => nums.filter(isEven),
     someeven: nums => nums.some(isEven),
+    everyeven: nums => nums.every(isEven),
     firsttwo: nums => nums.slice(0,2),
     lasttwo: nums => nums.slice(-2),
     has2: nums => nums.includes(2) ? true : false,
-    increment: nums => nums.map(num => num + 1)
+    increment: nums => nums.map(num => num + 1),
+    //random: ([x, y]) => Math.floor(Math.random() * y + x), //this works but I don't understand why
+    random: nums => Math.floor(Math.random() * (sum(spreadsheetFunctions.firsttwo(nums)) - spreadsheetFunctions.firsttwo(nums).sort((a,b) => a - b)[0]) + spreadsheetFunctions.firsttwo(nums).sort((a,b) => a - b)[0]),
+    //range: nums => range(...nums), //this works but I don't understand why
+    range: nums => range(...spreadsheetFunctions.firsttwo(nums).sort((a,b) => a-b))
   }
 
 const applyFunction = str => {
