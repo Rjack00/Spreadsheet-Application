@@ -27,6 +27,8 @@ const median = nums => {
 }
 
 const spreadsheetFunctions = {
+    //"": handles edge cases
+    "": (arg) => arg,
     sum,
     average,
     median,
@@ -37,10 +39,10 @@ const spreadsheetFunctions = {
     lasttwo: nums => nums.slice(-2),
     has2: nums => nums.includes(2) ? true : false,
     increment: nums => nums.map(num => num + 1),
-    //random: ([x, y]) => Math.floor(Math.random() * y + x), //this works but I don't understand why
+    //random: ([x, y]) => Math.floor(Math.random() * y + x), //uses destructuring
     random: nums => Math.floor(Math.random() * (sum(spreadsheetFunctions.firsttwo(nums)) - spreadsheetFunctions.firsttwo(nums).sort((a,b) => a - b)[0]) + spreadsheetFunctions.firsttwo(nums).sort((a,b) => a - b)[0]),
-    //range: nums => range(...nums), //this works but I don't understand why
-    range: nums => range(...spreadsheetFunctions.firsttwo(nums).sort((a,b) => a-b)),
+    range: ([x,y]) => range(...[x,y].sort((a,b) => a-b)), //uses destructuring
+    //range: nums => range(...spreadsheetFunctions.firsttwo(nums).sort((a,b) => a-b)),
     //nodupes: nums => [...new Set(nums).values()], //"new Set()" only allows unique values
     nodupes: nums => nums.filter((num, index) => nums.indexOf(num) === index)
   }
