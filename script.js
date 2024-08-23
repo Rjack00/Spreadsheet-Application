@@ -5,6 +5,24 @@ const infixToFunction = {
   "/": (x, y) => x / y,
 }
 
+const showFunctions = () => {
+  const x = document.getElementById("functionsSpan");
+  if(x.style.display === "none") {
+    x.style.display = "flex";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+const toggleButtonText = () => {
+  const btn = document.querySelector("button");
+  if(btn.innerText === "Show Functions") {
+    btn.innerText = "Hide Functions";
+  } else {
+    btn.innerText = "Show Functions";
+  }
+}
+
 const infixEval = (str, regex) => str.replace(regex, (_match, arg1, operator, arg2) => infixToFunction[operator](parseFloat(arg1), parseFloat(arg2)));
 
 const highPrecedence = str => {
