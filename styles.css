@@ -8,6 +8,10 @@ h1 {
   text-align: center;
 }
 
+button {
+  margin: 0 0 20px 50px;
+}
+
 span {
   display: flex;
 }
@@ -29,10 +33,17 @@ li {
     vertical-align: middle;
     line-height: 30px;
     color: black;
+    font-weight: 600;
     border: solid, 1px, black;
   }
 
   input {
     background-color: rgb(41, 41, 41);
     color: white;
+  }
+
+  input:focus {
+    background-color: black;
+    outline: 0.5px solid gray;
+    border: 1px solid gray;
   }
